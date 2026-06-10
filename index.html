@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A data story about poverty, income inequality and household expenditure pressure across Malaysian states." />
+  <title>Malaysia's Hidden Living Pressure</title>
+  <link rel="icon" href="data:," />
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body id="top">
+  <nav class="site-nav" aria-label="Page sections">
+    <a class="brand" href="#top" aria-label="Malaysia living pressure home">
+      <span class="brand-mark" aria-hidden="true">MY</span>
+      <span>Living Pressure</span>
+    </a>
+    <div class="nav-links">
+      <a href="#geography">Geography</a>
+      <a href="#dimensions">Dimensions</a>
+      <a href="#income">Income</a>
+      <a href="#pressure">Pressure</a>
+    </div>
+    <a class="nav-cta" href="#data">Explore data <span aria-hidden="true">→</span></a>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-backdrop" role="img" aria-label="Kuala Lumpur skyline and Malaysian residential landscape"></div>
+    <div class="hero-content">
+      <p class="eyebrow">FIT2179 Data Visualisation 2</p>
+      <h1>Malaysia's Hidden<br /><span class="text-accent">Living Pressure</span></h1>
+      <p class="hero-tagline"><span>Poverty.</span> <span>Income.</span> <span>Household strain.</span></p>
+      <p class="hero-copy">Malaysia's national progress is real, but it is not evenly experienced. This data story follows the pressure from where poverty concentrates, through the different forms it takes, to the income and expenditure forces that keep some households vulnerable.</p>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="story-lenses" aria-label="Story framework">
+      <article>
+        <span class="lens-number">01</span>
+        <p class="lens-label">Geographic lens</p>
+        <h2>Pressure is regional</h2>
+        <p>State-level patterns reveal disadvantage that a national average conceals.</p>
+      </article>
+      <article>
+        <span class="lens-number">02</span>
+        <p class="lens-label">Poverty lens</p>
+        <h2>One rate is not enough</h2>
+        <p>Broad deprivation, severe hardship and relative disadvantage do not identify the same places.</p>
+      </article>
+      <article>
+        <span class="lens-number">03</span>
+        <p class="lens-label">Household lens</p>
+        <h2>Income can mislead</h2>
+        <p>Higher earnings do not automatically remove inequality or expenditure pressure.</p>
+      </article>
+    </section>
+
+    <section class="story-section" id="geography">
+      <header class="section-header">
+        <span class="section-number">1</span>
+        <div>
+          <p class="section-kicker">The geographic divide</p>
+          <h2>Poverty is concentrated, <span class="text-accent">not evenly shared</span></h2>
+          <p>We begin with place. The national rate becomes more meaningful when Malaysia is viewed <strong class="text-accent">state by state</strong> and within its Southeast Asian context.</p>
+        </div>
+      </header>
+
+      <article class="figure-card figure-wide">
+        <div class="figure-copy">
+          <p class="figure-label">Figure 01 · Choropleth map</p>
+          <h3>Sabah is the clearest absolute-poverty hotspot</h3>
+          <p>Deep blue encodes deprivation, while surrounding countries remain neutral. The spatial gap shows why <strong class="text-accent">a single national average</strong> cannot describe Malaysia's lived reality.</p>
+        </div>
+        <div class="vis map-vis" id="map_poverty" aria-label="Map of absolute poverty by Malaysian state"></div>
+        <div class="insight-strip poverty-insight"><strong>Map insight</strong><span>Sabah records 19.7% absolute poverty in 2022, far above the lowest-rate federal territories.</span></div>
+        <p class="source-note">Source: Poverty by State, Malaysia, 2022. Malaysia state GeoJSON and Vega world map data.</p>
+      </article>
+
+      <article class="figure-card figure-wide">
+        <div class="figure-copy">
+          <p class="figure-label">Figure 02 · Ranked bar chart</p>
+          <h3>The state ranking exposes the size of the regional gap</h3>
+          <p>The map locates the problem; the ordered bars make its magnitude precise. <strong class="text-accent">Sabah, Kelantan and Sarawak</strong> form a visibly different poverty tier.</p>
+        </div>
+        <div class="vis" id="abs_poverty_rank" aria-label="Ranked bar chart of absolute poverty"></div>
+        <p class="chart-annotation">Sabah, Kelantan and Sarawak form the top poverty tier.</p>
+        <p class="source-note">Source: Poverty by State, Malaysia, 2022.</p>
+      </article>
+
+      <aside class="chapter-takeaway">
+        <p>Why it matters</p>
+        <h3>Geography identifies where pressure concentrates, but not what kind of hardship households experience.</h3>
+        <span>That requires separating poverty into its different dimensions.</span>
+      </aside>
+    </section>
+
+    <section class="story-section" id="dimensions">
+      <header class="section-header">
+        <span class="section-number">2</span>
+        <div>
+          <p class="section-kicker">The poverty divide</p>
+          <h2>Poverty is <span class="text-accent">not a single number</span></h2>
+          <p>Absolute, hardcore and relative poverty reveal <strong class="text-accent">different forms of hardship</strong> across the same states.</p>
+        </div>
+      </header>
+
+      <div class="two-column-grid dimensions-grid">
+        <article class="figure-card">
+          <div class="figure-copy">
+            <p class="figure-label">Figure 03 · Lollipop plot</p>
+            <h3>Severe hardship is smaller in scale, but sharply concentrated</h3>
+            <p>Because hardcore poverty values are low, a lollipop plot preserves <strong class="text-accent">small but meaningful differences</strong>.</p>
+          </div>
+          <aside class="chart-callout">
+            <span>Key reading</span>
+            <p>Sabah records the highest hardcore poverty rate at 1.2%.</p>
+          </aside>
+          <div class="vis" id="hardcore_poverty_dot" aria-label="Lollipop chart of hardcore poverty"></div>
+          <p class="source-note">Source: Poverty by State, Malaysia, 2022.</p>
+        </article>
+
+        <article class="figure-card">
+          <div class="figure-copy">
+            <p class="figure-label">Figure 04 · Parallel coordinates</p>
+            <h3>Different states carry different poverty profiles</h3>
+            <p>Parallel axes compare how each state's exposure changes across <strong class="text-accent">relative, absolute and hardcore poverty</strong>.</p>
+          </div>
+          <aside class="chart-callout">
+            <span>Key reading</span>
+            <p>Sabah reaches the dimension maximum for absolute and hardcore poverty.</p>
+          </aside>
+          <div class="vis parallel-vis" id="poverty_parallel" aria-label="Parallel coordinates plot comparing three poverty dimensions"></div>
+          <p class="normalisation-note">Values are normalised within each poverty dimension. 100% means the highest state in that dimension, not a 100% poverty rate.</p>
+          <p class="source-note">Source: Poverty by State, Malaysia, 2022.</p>
+        </article>
+      </div>
+
+      <aside class="chapter-takeaway">
+        <p>Main pattern</p>
+        <h3>A state can rank lower on basic deprivation yet remain highly exposed to relative disadvantage.</h3>
+        <span>The next question is whether income growth has reduced these differences equally.</span>
+      </aside>
+    </section>
+
+    <section class="story-section" id="income">
+      <header class="section-header">
+        <span class="section-number">3</span>
+        <div>
+          <p class="section-kicker">The income divide</p>
+          <h2>Income growth has <span class="text-accent">not produced equal security</span></h2>
+          <p>Household incomes have risen over time, but outcomes <strong class="text-accent">still diverge substantially</strong> across states.</p>
+        </div>
+      </header>
+
+      <article class="figure-card figure-wide">
+        <div class="figure-copy">
+          <p class="figure-label">Figure 05 · Multi-series line chart</p>
+          <h3>Income rose across Malaysia, but the distance between states persisted</h3>
+          <p>Selected states keep the long-run trend readable while showing how high-income urban regions pulled away from Sabah, Kelantan and Sarawak.</p>
+        </div>
+        <div class="vis" id="income_trend" aria-label="Median household income trend"></div>
+        <p class="source-note">Source: Household Income by State, Malaysia, 1970–2022.</p>
+      </article>
+
+      <div class="two-column-grid unequal">
+        <article class="figure-card">
+          <div class="figure-copy">
+            <p class="figure-label">Figure 06 · Dumbbell chart</p>
+            <h3>Mean income often sits well above the typical household</h3>
+          <p>The distance between <strong class="text-accent">median and mean income</strong> shows how strongly high earners lift the average.</p>
+          </div>
+          <aside class="chart-callout">
+            <span>Key reading</span>
+            <p>Putrajaya has the widest gap between mean and median income.</p>
+          </aside>
+          <div class="vis" id="income_dumbbell" aria-label="Dumbbell chart comparing mean and median income"></div>
+          <p class="source-note">Source: Household Income by State, Malaysia, 2022.</p>
+        </article>
+
+        <article class="figure-card">
+          <div class="figure-copy">
+          <p class="figure-label">Figure 07 · Scatter plot with regression</p>
+            <h3>Higher income usually lowers poverty, but not perfectly</h3>
+            <p>The downward trend is clear, yet several states sit away from the expected line. <strong class="text-accent">Income alone</strong> cannot explain every poverty outcome.</p>
+          </div>
+          <aside class="chart-callout">
+            <span>Key reading</span>
+            <p>Sabah remains a high-poverty outlier despite its higher median income.</p>
+          </aside>
+          <div class="vis" id="income_poverty_scatter" aria-label="Scatter plot of income and poverty"></div>
+          <p class="source-note">Source: Household Income and Poverty by State, Malaysia, 2022.</p>
+        </article>
+      </div>
+
+      <article class="figure-card figure-wide">
+        <div class="figure-header-with-note">
+          <div class="figure-copy">
+            <p class="figure-label">Figure 08 · Bump chart</p>
+            <h3>Poverty rankings move, but regional vulnerability remains persistent</h3>
+            <p>Tracking rank shows which states <strong class="text-accent">remain near the top</strong> of the poverty hierarchy across survey years.</p>
+          </div>
+          <p class="chart-annotation figure-header-note">Note: This is a ranking chart, not a poverty-rate chart. Rank 1 is placed at the top because it represents the state with the highest poverty rate. Lines that remain near the top indicate states that consistently experience higher poverty vulnerability across survey years.</p>
+        </div>
+        <div class="vis" id="poverty_bump" aria-label="Bump chart of poverty rank over time"></div>
+        <p class="source-note">Source: Poverty by State, Malaysia, 2012–2022.</p>
+      </article>
+
+      <aside class="chapter-takeaway">
+        <p>Why it matters</p>
+        <h3>Income explains part of the story, but household security depends on what income must cover.</h3>
+        <span>The final chapter introduces expenditure and the resulting living-pressure ratio.</span>
+      </aside>
+    </section>
+
+    <section class="story-section" id="pressure">
+      <header class="section-header">
+        <span class="section-number">4</span>
+        <div>
+          <p class="section-kicker">The household pressure divide</p>
+          <h2>Living pressure appears when <span class="text-accent">expenditure meets income</span></h2>
+          <p>Combining expenditure with income identifies states where apparently adequate earnings still leave <strong class="text-accent">little room</strong>.</p>
+        </div>
+      </header>
+
+      <article class="figure-card figure-wide">
+        <div class="figure-copy">
+          <p class="figure-label">Figure 09 · Heatmap</p>
+          <h3>Household expenditure rose in available post-2019 survey years</h3>
+          <p>The matrix compares states across available survey years. Deeper gold-brown indicates higher monthly expenditure.</p>
+        </div>
+        <div class="vis" id="expenditure_heatmap" aria-label="Heatmap of household expenditure"></div>
+        <p class="source-note">Source: Household Expenditure by State, Malaysia, 2019–2024.</p>
+      </article>
+
+      <article class="figure-card figure-wide" id="figure-10">
+        <div class="figure-header-with-note">
+          <div class="figure-copy">
+            <p class="figure-label">Figure 10 · Quadrant bubble plot</p>
+            <h3>High income does not guarantee low household pressure</h3>
+            <p>Income sets the horizontal position and expenditure sets the vertical position. Bubble size shows absolute poverty, while darker colour indicates a higher expenditure-to-income ratio. This helps show that high-income states may still face high living costs, while lower-income states may carry stronger poverty vulnerability.</p>
+          </div>
+          <p class="chart-annotation figure-header-note">Note: A higher expenditure-to-income ratio means households spend a larger share of income, leaving less financial breathing room. A ratio close to 1.0 means monthly expenditure is close to monthly income. Bubble size should be read together with colour: large bubbles show poverty severity, while darker colour shows higher spending pressure.</p>
+        </div>
+        <div class="vis" id="living_pressure_bubble" aria-label="Bubble chart of income, expenditure and living pressure"></div>
+        <div class="figure10-legends" aria-label="Figure 10 legends">
+          <div class="figure10-legend-group">
+            <p>Household pressure: expenditure-to-income ratio</p>
+            <div class="pressure-legend-ramp" aria-hidden="true"></div>
+            <div class="pressure-legend-labels"><span>0.6</span><span>1.0</span></div>
+          </div>
+          <div class="figure10-legend-group">
+            <p>Absolute poverty (%)</p>
+            <div class="bubble-legend-items">
+              <span class="bubble-legend-item"><i class="bubble-size-0"></i><b>0</b></span>
+              <span class="bubble-legend-item"><i class="bubble-size-5"></i><b>5</b></span>
+              <span class="bubble-legend-item"><i class="bubble-size-10"></i><b>10</b></span>
+              <span class="bubble-legend-item"><i class="bubble-size-15"></i><b>15</b></span>
+            </div>
+          </div>
+        </div>
+        <div class="insight-strip pressure-insight"><strong>Final visual takeaway</strong><span>Kelantan shows one of the highest expenditure-to-income pressure levels, revealing <span class="insight-emphasis">hidden pressure</span> that income alone cannot describe.</span></div>
+        <p class="source-note">Source: Household Income, Expenditure and Poverty by State, Malaysia, 2022.</p>
+      </article>
+    </section>
+
+    <aside class="big-picture" aria-label="The big picture summary">
+      <p class="section-kicker">The big picture</p>
+      <h2>Malaysia's living pressure is spatial, multidimensional and household-specific.</h2>
+      <ul>
+        <li>Sabah, Kelantan and Sarawak carry the clearest absolute-poverty burden.</li>
+        <li>Hardcore and relative poverty reveal different vulnerabilities from absolute poverty.</li>
+        <li>Income growth has not erased the distance between states or the gap between mean and median households.</li>
+        <li>Expenditure changes the interpretation of wellbeing: earnings matter, but so does how much of them households must spend.</li>
+      </ul>
+    </aside>
+
+  </main>
+
+  <footer class="site-footer" id="data">
+    <div class="footer-grid">
+      <section class="footer-block">
+        <p class="footer-label">About</p>
+        <p>A storytelling visualisation exploring how poverty, income and household expenditure reveal hidden living pressure across Malaysian states.</p>
+      </section>
+      <section class="footer-block">
+        <p class="footer-label">Data sources</p>
+        <ul class="footer-links">
+          <li><a href="https://open.dosm.gov.my/data-catalogue/hh_poverty_state" target="_blank" rel="noopener noreferrer">Poverty by State, Malaysia</a></li>
+          <li><a href="https://open.dosm.gov.my/data-catalogue/hh_income_state" target="_blank" rel="noopener noreferrer">Household Income by State, Malaysia</a></li>
+          <li><a href="https://open.dosm.gov.my/data-catalogue/hh_expenditure_parlimen" target="_blank" rel="noopener noreferrer">Household Expenditure by State, Malaysia</a></li>
+          <li>Malaysia state GeoJSON and Vega world map data</li>
+        </ul>
+      </section>
+      <section class="footer-block">
+        <p class="footer-label">Author</p>
+        <p>Jingyi Lin<br />Published June 2026.</p>
+      </section>
+      <section class="footer-block">
+        <p class="footer-label">Acknowledgements</p>
+        <p>AI provided support for visual layout and implementation, created all SVG images, while data values were transcribed from the reports cited.</p>
+        <p>Built with Vega-Lite and vanilla HTML/CSS.<br />Developed for FIT2179 Data Visualisation 2 at Monash University Malaysia.</p>
+      </section>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Jingyi Lin</span>
+      <span>Monash University Malaysia · FIT2179</span>
+    </div>
+  </footer>
+
+  <script src="js/vega_lite_vis.js"></script>
+</body>
+</html>
